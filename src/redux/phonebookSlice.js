@@ -6,6 +6,15 @@ const initialPhonebook = {
   filter: '',
 }
 
+// {
+//   contacts: {
+//     items: [],
+//     isLoading: false,
+//     error: null
+//   },
+//   filter: ""
+// }
+
 export const phonebookSlice = createSlice({
   name: 'phonebook',
   initialState: initialPhonebook,
