@@ -25,11 +25,11 @@ export default function ContactList() {
     return filteredContacts.length > 0 && (
         <div className={css.contactListBlock}>
             <ul>
-                {filteredContacts.map(({ id, name, number }) => (
+                {filteredContacts.map(({ id, name, phone }) => (
                     <Contact
                         key={id}
                         name={name}
-                        number={number}
+                        number={phone}
                         onDeleteContact={() => deleteContact(id)}
                     /> 
                 ))}
