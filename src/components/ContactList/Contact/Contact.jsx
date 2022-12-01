@@ -1,11 +1,11 @@
 import css from './Contact.module.css'
 import PropTypes from 'prop-types';
 
-export default function Contact({ name, number, onDeleteContact }) {
+export default function Contact({ name, phone, onDeleteContact }) {
     return (
         <li className={css.ContactListItem}>
             <p>{name}: </p>
-            <p>{number}</p>
+            <p>{phone}</p>
             <button 
                 type='button'
                 onClick={onDeleteContact}
@@ -16,6 +16,6 @@ export default function Contact({ name, number, onDeleteContact }) {
 
 Contact.propTypes = {
     name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
     onDeleteContact: PropTypes.func.isRequired,
 };

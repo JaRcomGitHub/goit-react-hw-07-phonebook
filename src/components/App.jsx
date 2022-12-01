@@ -3,15 +3,16 @@ import ContactList from "./ContactList";
 import Filter from "./Filter"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasks } from "redux/operations";
+import { fetchContacts } from "redux/operations";
+import { selectContacts } from "redux/selectors";
 
 
 export default function App() {
   const dispatch = useDispatch();
-  const { isLoading, error } = useSelector(store => store.phonebook.contacts);
+  const { isLoading, error } = useSelector(selectContacts);
 
   useEffect(() => {
-    dispatch(fetchTasks());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (

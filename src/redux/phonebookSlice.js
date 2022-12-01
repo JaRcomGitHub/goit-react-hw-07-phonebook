@@ -1,6 +1,5 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { fetchTasks2 } from "./operations";
-import initialContacts from '../components/contacts.json'
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchContacts } from "./operations";
 
 
 // mockapi.io API endpoint
@@ -18,7 +17,7 @@ import initialContacts from '../components/contacts.json'
 
 const initialPhonebook = {
   contacts: {
-    items: initialContacts,//[]
+    items: [],
     isLoading: false,
     error: null
   },
@@ -29,58 +28,52 @@ export const phonebookSlice = createSlice({
   name: 'contacts',
   initialState: initialPhonebook,
   reducers: {
-    fetchContacts() {},//GET
+    //fetchContacts() {},//GET
     // addContact() {},//POST
-    deleteContact() { },//DELETE
-    
+    // deleteContact() { },//DELETE
 
-    fetchingInProgress(state) {
-      state.contacts.isLoading = true;
-    },
-    fetchingSuccess(state, action) {
-      state.contacts.isLoading = false;
-      state.contacts.error = null;
-      state.contacts.items = action.payload;
-    },
-    fetchingError(state, action) {
-      state.contacts.isLoading = false;
-      state.contacts.error = action.payload;
-    },
+    // fetchingInProgress(state) {
+    //   state.contacts.isLoading = true;
+    // },
+    // fetchingSuccess(state, action) {
+    //   state.contacts.isLoading = false;
+    //   state.contacts.error = null;
+    //   state.contacts.items = action.payload;
+    // },
+    // fetchingError(state, action) {
+    //   state.contacts.isLoading = false;
+    //   state.contacts.error = action.payload;
+    // },
 
-    
-    addContact(state, action) {
-      state.contacts.items.push({ id: nanoid(), ...action.payload });
-    },
-    delContact(state, action) {
-      state.contacts.items = state.contacts.items.filter(contact => contact.id !== action.payload);
-    },
-    setFilter(state, action) {
-      state.filter = action.payload;
-    },
+    // addContact(state, action) {
+    //   state.contacts.items.push({ id: nanoid(), ...action.payload });
+    // },
+    // delContact(state, action) {
+    //   state.contacts.items = state.contacts.items.filter(contact => contact.id !== action.payload);
+    // },
+    // setFilter(state, action) {
+    //   state.filter = action.payload;
+    // },
+
   },
-  // Добавляем обработку внешних экшенов
-  extraReducers: {
-    [fetchTasks2.pending](state) {
+    extraReducers: {
+    [fetchContacts.pending](state) {
       state.contacts.isLoading = true;
     },
-    [fetchTasks2.fulfilled](state, action) {
+    [fetchContacts.fulfilled](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = null;
       state.contacts.items = action.payload;
     },
-    [fetchTasks2.rejected](state, action) {
+    [fetchContacts.rejected](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = action.payload;
     },
-
   },
 });
 
-export const { fetchingInProgress, fetchingSuccess, fetchingError } = phonebookSlice.actions;
-export const { addContact, delContact, setFilter } = phonebookSlice.actions;
-export const getContacts = store => store.phonebook.contacts.items;
-export const getFilter = store => store.phonebook.filter;
-
+// export const { fetchingInProgress, fetchingSuccess, fetchingError } = phonebookSlice.actions;
+// export const { addContact, delContact, setFilter } = phonebookSlice.actions;
 
 
 

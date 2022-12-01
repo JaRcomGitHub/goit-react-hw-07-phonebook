@@ -1,14 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, getFilter, setFilter } from 'redux/phonebookSlice';
+import { useSelector } from 'react-redux';
+// import { setFilter } from 'redux/phonebookSlice';
+import { selectContactsItem, selectFilter } from 'redux/selectors';
 import css from './Filter.module.css'
 
 export default function Filter() {
-    const contacts = useSelector(getContacts);
-    const filter = useSelector(getFilter);
-    const dispatch = useDispatch();
+    const contacts = useSelector(selectContactsItem);
+    const filter = useSelector(selectFilter);
+    // const dispatch = useDispatch();
 
     const changeFilter = event => {
-        dispatch(setFilter(event.currentTarget.value));
+        // dispatch(setFilter(event.currentTarget.value));
     };
 
     return contacts.length > 0 &&  (

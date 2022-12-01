@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact, getContacts } from "redux/phonebookSlice";
+import { addContact } from "redux/operations";
+import { selectContactsItem } from "redux/selectors";
 import css from './ContactForm.module.css'
 
 export default function ContactForm() {
     const [name, setName] = useState('');//'Name Names'
-    const [number, setNumber] = useState('');//'123-456-789'
-    const contacts = useSelector(getContacts);
+    const [phone, setPhone] = useState('');//'123-456-789'
+    const contacts = useSelector(selectContactsItem);
     const dispatch = useDispatch();
-
-    const onAlert = name =>  {
-        window.alert(`${name} is already in contacts.`);
-    }
   
     const checkContact = (name) => {
         const normolizedName = name.toLowerCase();
@@ -25,17 +22,17 @@ export default function ContactForm() {
         event.preventDefault();
 
         if (checkContact(name)) {
-            onAlert(name);
+            window.alert(`${name} is already in contacts.`);
             return;
         }
         
-        dispatch(addContact({ name, number }));
+        dispatch(addContact({ name, phone }));
         reset();
     }
 
     const reset = () => {
         setName('');
-        setNumber('');
+        setPhone('');
     }
         
     const handleInputChangeName = event => {
@@ -43,7 +40,7 @@ export default function ContactForm() {
     }
 
     const handleInputChangeNumber = event => {
-        setNumber(event.currentTarget.value);
+        setPhone(event.currentTarget.value);
     }
 
     return (
@@ -61,14 +58,14 @@ export default function ContactForm() {
                 />
             </label>
             <label>
-                Number
+                Phone
                 <input
                     type="tel"
-                    name="number"
+                    name="phone"
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
-                    value={number}
+                    value={phone}
                     onChange={handleInputChangeNumber}
                 />
             </label>
